@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>973</width>
+    <height>513</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_9">
+   <item>
+    <layout class="QHBoxLayout" name="mainLA">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>мощность нагрева</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="pGenDSB">
+           <property name="minimum">
+            <double>0.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>3000.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>100.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>мощность пельтье</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="pPelDSB">
+           <property name="minimum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>3000.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>130.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>уставка температуры</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="tDSB">
+           <property name="minimum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>3000.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>15.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>теплоемкость</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="qDSB">
+           <property name="minimum">
+            <double>0.010000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>99999.990000000005239</double>
+           </property>
+           <property name="value">
+            <double>20.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>теплопроводность термистра * 100</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="kDSB">
+           <property name="minimum">
+            <double>0.010000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>99999.990000000005239</double>
+           </property>
+           <property name="value">
+            <double>2.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>теплоемкость термистра * 100</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="qkDSB">
+           <property name="minimum">
+            <double>0.010000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>99999.990000000005239</double>
+           </property>
+           <property name="value">
+            <double>10.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="pCB">
+         <property name="text">
+          <string>P &gt;0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>z</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="zSB">
+           <property name="maximum">
+            <double>999.990000000000009</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value">
+            <double>1.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>I</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="iSB">
+           <property name="maximum">
+            <number>10000</number>
+           </property>
+           <property name="value">
+            <number>700</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>D</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="dSB">
+           <property name="maximum">
+            <number>10000</number>
+           </property>
+           <property name="value">
+            <number>130</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QWidget" name="graf" native="true"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pGenDSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>478</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qDSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>967</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kDSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>971</x>
+     <y>158</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qkDSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>970</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>iSB</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>438</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>968</x>
+     <y>378</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>zSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>385</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>965</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dSB</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>490</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>969</x>
+     <y>450</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pCB</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>27</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>971</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pPelDSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>970</x>
+     <y>34</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tDSB</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>Widget</receiver>
+   <slot>updateGraf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>969</x>
+     <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateGraf()</slot>
+ </slots>
+</ui>
