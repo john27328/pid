@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "widget.h"
 #include <QDebug>
 #define MAXTIME 120
 #define PERIOD 3
@@ -67,13 +68,60 @@ Widget::~Widget()
 
 double Widget::pid(double tTerm, double tUst,double time,double dTime)
 {
-    double zT = 10;
+    double zT = 100;
     double dT = tTerm - tUst;
     static int direction = 0; //0-нагрев. 1- охлаждение
     static int oldDirection = direction;
     if (I < -0.1)
         direction = 0;
     if (I > 0.1)
+        direction = 1;
+    if (direction !=oldDirection){
+        oldDirection = direction;
+        //I = 0;
+    }
+    P = dT / z;
+    if (ui->pCB->isChecked()) {
+        if (P < -zT) P = - zT;
+        if (P > zT) P = zT;
+    }
+
+    if (time == 0.) I = 0;
+    I += i * dT * dTime / 10000;
+    //if (ui->pCB->isChecked()) {
+        if (I < -zT) I = - zT;
+        if (I > zT) I = zT;
+    //}
+
+    static double tlast = tTerm;
+    D = d * (tTerm - tlast) / 100./dTime;
+    if (ui->pCB->isChecked()) {
+        if (D<-1*zT) D = - 1 * zT;
+        if (D>1*zT) D = 1 * zT;
+    }
+    tlast = tTerm;
+    double pidK = P + I + D;
+    if (direction == 0) {
+        if (pidK > 0) pidK = 0;
+        if (pidK < -1) pidK = -1;
+    }
+    else {
+        if (pidK > 1) pidK = 1;
+        if (pidK < 0) pidK = 0;
+    }
+    //qDebug()<<tTerm<<p<<i<<d<<pidK<<sDT;
+    return pidK;
+}
+
+double Widget::pidOld(double tTerm, double tUst,double time,double dTime)
+{
+    double zT = 10;
+    double dT = tTerm - tUst;
+    static int direction = 0; //0-нагрев. 1- охлаждение
+    static int oldDirection = direction;
+    if (dT < -0.5)
+        direction = 0;
+    if (dT > 0.5)
         direction = 1;
     if (direction !=oldDirection){
         oldDirection = direction;
@@ -94,10 +142,10 @@ double Widget::pid(double tTerm, double tUst,double time,double dTime)
 
     static double tlast = tTerm;
     D = d * (tTerm - tlast) / 100./dTime;
-    if (ui->pCB->isChecked()) {
-        if (D<-1*zT) D = - 1*zT;
-        if (D>1*zT) D = 1*zT;
-    }
+
+    if (D<-zT) D = - zT;
+    if (D>zT) D = zT;
+
     tlast = tTerm;
     double pidK = P + I + D;
     if (direction == 0) {
@@ -118,7 +166,7 @@ void Widget::updateGraf()
     qDebug()<<"!";
     double pGen = ui->pGenDSB->value();
     double pPel = ui->pPelDSB->value();
-    double dTime = 0.0001;
+    double dTime = 0.001;
     qDL = ui->qDSB->value();
     k = ui->kDSB->value()/100.;
     qTerm = ui->qkDSB->value()/100.;
@@ -146,7 +194,9 @@ void Widget::updateGraf()
         double tTerm = eTerm  /qTerm - 273;
         double Pterm = k * (tDL - tTerm);
         eTerm += Pterm * dTime;
-        double dE = pid(tTerm,tUst,time,dTime) * pPel * dTime;
+        double dE = !ui->pCB->isChecked() ?
+                pid(tTerm,tUst,time,dTime) * pPel * dTime :
+                 pidOld(tTerm,tUst,time,dTime) * pPel * dTime;
         eDL += pGen * dTime - dE;
         //ui->graf->addDots(tDL,tTerm,time);
         tpl++;

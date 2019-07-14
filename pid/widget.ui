@@ -165,7 +165,7 @@
        <item>
         <widget class="QCheckBox" name="pCB">
          <property name="text">
-          <string>P &gt;0</string>
+          <string>old</string>
          </property>
         </widget>
        </item>

@@ -40,6 +40,7 @@ private:
     double P;
     double I;
     double D;
+    double pidOld(double tTerm, double tUst, double time, double dTime);
 private slots:
     void updateGraf();
 
