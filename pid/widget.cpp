@@ -1,7 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QDebug>
-#define MAXTIME 60
+#define MAXTIME 120
 #define PERIOD 3
 #define PGEN 30
 
@@ -53,7 +53,7 @@ Widget::Widget(QWidget *parent) :
     seriesD->attachAxis(axisY);
 
     axisX->setRange(0,MAXTIME*PERIOD);
-    axisY->setRange(10,30);
+    axisY->setRange(10,70);
 
     chartView = new QChartView(chart);
     ui->mainLA->addWidget(chartView);
@@ -67,26 +67,29 @@ Widget::~Widget()
 
 double Widget::pid(double tTerm, double tUst,double time,double dTime)
 {
-    double zT = 1;
+    double zT = 10;
     double dT = tTerm - tUst;
+    static int direction = 0; //0-нагрев. 1- охлаждение
+    static int oldDirection = direction;
+    if (I < -0.1)
+        direction = 0;
+    if (I > 0.1)
+        direction = 1;
+    if (direction !=oldDirection){
+        oldDirection = direction;
+        //I = 0;
+    }
     P = dT / z;
     if (ui->pCB->isChecked()) {
         if (P<-zT) P = - zT;
         if (P>zT) P = zT;
     }
 
-//    static double sDT = 0;
-//    if (time == 0.) sDT = 0;
-//    sDT += dT*dTime;
-//    if (sDT<-1) sDT = - 1;
-//    if (sDT>1) sDT = 1;
-//    I = i * sDT/1000;
-
     if (time == 0.) I = 0;
     I += i*dT*dTime/10000;
     //if (ui->pCB->isChecked()) {
-        if (I<-1) I = - 1;
-        if (I>1) I = 1;
+        if (I < -zT) I = - zT;
+        if (I > zT) I = zT;
     //}
 
     static double tlast = tTerm;
@@ -97,8 +100,14 @@ double Widget::pid(double tTerm, double tUst,double time,double dTime)
     }
     tlast = tTerm;
     double pidK = P + I + D;
-    if (pidK > 1) pidK = 1;
-    if (pidK < 0) pidK = 0;
+    if (direction == 0) {
+        if (pidK > 0) pidK = 0;
+        if (pidK < -1) pidK = -1;
+    }
+    else {
+        if (pidK > 1) pidK = 1;
+        if (pidK < 0) pidK = 0;
+    }
     //qDebug()<<tTerm<<p<<i<<d<<pidK<<sDT;
     return pidK;
 }
@@ -106,7 +115,7 @@ double Widget::pid(double tTerm, double tUst,double time,double dTime)
 void Widget::updateGraf()
 {
     qDebug()<<ui->pCB->isChecked()<<"!";
-     qDebug()<<"!";
+    qDebug()<<"!";
     double pGen = ui->pGenDSB->value();
     double pPel = ui->pPelDSB->value();
     double dTime = 0.0001;
@@ -127,8 +136,12 @@ void Widget::updateGraf()
     int tpl=0;
     for(double time = 0; time <= MAXTIME * PERIOD; time += dTime)
     {
-        if(time > MAXTIME && time < 2 * MAXTIME) pGen=10;
-        else pGen=ui->pGenDSB->value();;
+//        if(time > MAXTIME && time < 2 * MAXTIME)
+//            pGen=-ui->pGenDSB->value();
+//        else
+//            pGen=ui->pGenDSB->value();
+
+        pGen +=120* dTime / MAXTIME / PERIOD;
         double tDL = eDL  /qDL - 273;
         double tTerm = eTerm  /qTerm - 273;
         double Pterm = k * (tDL - tTerm);
