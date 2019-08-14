@@ -12,3 +12,6 @@ build-pid-Desktop_Qt_5_12_3_MinGW_64_bit-Debug/Makefile
 *.exe
 *.obj
 ui_*
+build-pid-Desktop_Qt_5_13_0_GCC_64bit-Debug/Makefile
+
+build-pid-Desktop_Qt_5_13_0_GCC_64bit-Release/Makefile
